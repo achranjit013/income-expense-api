@@ -1,0 +1,60 @@
+#API testing for our transcation history
+
+@userAPI = http://localhost:8000/api/v1/user
+
+@transactionAPI = http://localhost:8000/api/v1/transaction
+
+#API testing for our 
+
+###check server status
+GET http://localhost:8000
+
+# === user apis
+
+### User get API
+GET {{userAPI}}
+
+### User post API
+POST {{userAPI}}
+Content-Type: application/json
+
+{
+  "name": "Ranjit",
+  "email": "ra@r.com",
+  "password": "123123"
+}
+
+### User login API
+POST {{userAPI}}/login
+Content-Type: application/json
+
+{
+  "email": "r@r.com",
+  "password": "123123"
+}
+
+### User put API
+PUT  {{userAPI}}
+
+### User patch API
+PATCH  {{userAPI}}
+
+### User delete API
+DELETE  {{userAPI}}
+
+# == transaction apis
+
+### transaction get API
+GET {{transactionAPI}}
+
+### transaction post API
+POST {{transactionAPI}}
+Content-Type: application/json
+Authorization: 655ac3e6f7521d8ee69b4626
+
+{
+  "amount":"12345",
+  "date": "2023-01-01",
+  "title": "transaction 01",
+  "type": "income"
+}
