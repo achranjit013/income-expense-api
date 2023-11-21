@@ -1,17 +1,16 @@
 import express from "express";
 import {
+  deleteManyTransaction,
   getTransactionByUserId,
   insertTransaction,
-} from "../module/transaction/TransactionModule.js";
+} from "../model/transaction/TransactionModel.js";
 import { userAuth } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 //insert
 router.post("/", userAuth, async (req, res) => {
-  console.log("ffffffff");
   try {
-    console.log("ffffffff");
     const result = await insertTransaction({ ...req.body, userId: req.userId });
 
     result?._id
@@ -34,7 +33,6 @@ router.post("/", userAuth, async (req, res) => {
 // get
 router.get("/", userAuth, async (req, res, next) => {
   try {
-    console.log("i am in get");
     const tranList = await getTransactionByUserId(req.userId);
 
     res.json({
@@ -45,6 +43,23 @@ router.get("/", userAuth, async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+});
+
+// delete
+router.delete("/", userAuth, async (req, res) => {
+  const { ids } = req.body;
+  const result = await deleteManyTransaction(req.userId, ids);
+
+  result?.deletedCount
+    ? res.json({
+        status: "success",
+        message: "All The transactions has been deleted",
+      })
+    : res.json({
+        status: "error",
+        message:
+          "Error, unable to delete the transactions. Please try again later",
+      });
 });
 
 export default router;

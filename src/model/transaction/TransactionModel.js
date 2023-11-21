@@ -11,4 +11,8 @@ export const getTransactionByUserId = (userId) => {
 };
 
 // delete
+export const deleteManyTransaction = (userId, ids) => {
+  return TransactionSchema.deleteMany({ userId, _id: { $in: ids } });
+};
+
 // update

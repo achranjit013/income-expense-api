@@ -1,5 +1,5 @@
 import express from "express";
-import { getUserByEmail, insertUser } from "../module/user/UserModule.js";
+import { getUserByEmail, insertUser } from "../model/user/UserModel.js";
 import { comparePassword, hashPassword } from "../utils/bcryptHelper.js";
 
 const router = express.Router();

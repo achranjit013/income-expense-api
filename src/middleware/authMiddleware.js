@@ -1,4 +1,4 @@
-import { getUserById } from "../module/user/UserModule.js";
+import { getUserById } from "../model/user/UserModel.js";
 
 export const userAuth = async (req, res, next) => {
   try {
